@@ -1,20 +1,20 @@
 import sys
 import sqlite3
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
+from main_ui import Ui_MainWindow1
+from addEditCoffeeForm import Ui_MainWindow2
 
-
-class Coffee(QMainWindow):
+class Coffee(Ui_MainWindow1, QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        self.setupUi(self)
         self.view()
         self.info.clicked.connect(self.print_info)
         self.add.clicked.connect(self.addEdit)
         self.change.clicked.connect(self.addEdit)
 
     def view(self):
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.cursor()
         titles = cur.execute("""SELECT title FROM coffee""").fetchall()
         for i in titles:
@@ -23,7 +23,7 @@ class Coffee(QMainWindow):
 
     def print_info(self):
         title = self.sortbox.currentText()
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.cursor()
         info = cur.execute("""SELECT * FROM coffee WHERE title = '{}'""".format(title)).fetchall()[0]
         con.close()
@@ -41,12 +41,12 @@ class Coffee(QMainWindow):
         nc.show()
 
 
-class NewCoffee(QMainWindow):
+class NewCoffee(Ui_MainWindow2, QMainWindow):
     def __init__(self, parent, b, old_title):
         super().__init__()
         self.old_title = old_title
         self.parent = parent
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         if b == 'Добавить новый':
             self.setWindowTitle('Создание')
             self.info.setText('Добавить новую запись о кофе')
@@ -54,7 +54,7 @@ class NewCoffee(QMainWindow):
         elif b == 'Изменить':
             self.setWindowTitle('Изменение')
             self.info.setText('Изменить запись о кофе')
-            con = sqlite3.connect("coffee.sqlite")
+            con = sqlite3.connect("data/coffee.sqlite")
             cur = con.cursor()
             info = cur.execute("""SELECT * FROM coffee WHERE title = '{}'""".format(self.old_title)).fetchall()[0]
             con.close()
@@ -68,7 +68,7 @@ class NewCoffee(QMainWindow):
             self.save.clicked.connect(self.edit_coffee)
 
     def add_coffee(self):
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.cursor()
         # added coffee
         if (len(self.title.toPlainText()) != 0) and (len(self.roast.toPlainText()) != 0) \
@@ -95,7 +95,7 @@ class NewCoffee(QMainWindow):
 
 
     def edit_coffee(self):
-        con = sqlite3.connect("coffee.sqlite")
+        con = sqlite3.connect("data/coffee.sqlite")
         cur = con.cursor()
         # changed info
         if (len(self.title.toPlainText()) != 0) and (len(self.roast.toPlainText()) != 0) \
