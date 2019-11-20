@@ -94,7 +94,7 @@ QComboBox QAbstractItemView {
      <rect>
       <x>30</x>
       <y>100</y>
-      <width>121</width>
+      <width>111</width>
       <height>41</height>
      </rect>
     </property>
@@ -210,6 +210,62 @@ background-color: BISQUE;border: 2px solid #B47747; border-radius: 8px;
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="change">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>100</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: white;border: 2px solid #B47747; border-radius: 8px;
+}
+
+QPushButton:hover {
+background-color: BISQUE;border: 2px solid #B47747; border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Изменить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="add">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>50</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+background-color: white;border: 2px solid #B47747; border-radius: 8px;
+}
+
+QPushButton:hover {
+background-color: BISQUE;border: 2px solid #B47747; border-radius: 8px;
+}</string>
+    </property>
+    <property name="text">
+     <string>Добавить новый</string>
     </property>
    </widget>
   </widget>
